@@ -5,6 +5,7 @@ import {
   Platform,
   StyleSheet,
   View,
+  LayoutAnimation,
 } from 'react-native';
 
 import ActionSheet from '@exponent/react-native-action-sheet';
@@ -39,6 +40,7 @@ const MIN_INPUT_TOOLBAR_HEIGHT = 44;
 
 class GiftedChat extends React.Component {
   constructor(props) {
+    console.debug('GC: Create GC');
     super(props);
 
     // default values
@@ -102,16 +104,19 @@ class GiftedChat extends React.Component {
   }
 
   componentWillMount() {
+    console.debug('GC: Will Mount');
     this.setIsMounted(true);
     this.initLocale();
     this.initMessages(this.props.messages);
   }
 
   componentWillUnmount() {
+    console.debug('GC: Will Unmount');
     this.setIsMounted(false);
   }
 
   componentWillReceiveProps(nextProps = {}) {
+    console.debug('GC: Will Receive Props');
     this.initMessages(nextProps.messages);
   }
 
@@ -349,18 +354,32 @@ class GiftedChat extends React.Component {
   }
 
   onInitialLayoutViewLayout(e) {
+    console.debug('GC: Initial layout');
     const layout = e.nativeEvent.layout;
     if (layout.height <= 0) {
+      console.debug('GC: Zero height');
       return;
     }
+    console.debug('GC: Set Max Height');
     this.setMaxHeight(layout.height);
+    console.debug('GC: Trigger InteractionManager');
+    this.failsafeTimeout = setTimeout(() => {
+      this._completeLoading();
+    }, 1000);
     InteractionManager.runAfterInteractions(() => {
-      this.setState({
-        isInitialized: true,
-        text: '',
-        composerHeight: MIN_COMPOSER_HEIGHT,
-        messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight()),
-      });
+      clearTimeout(this.failsafeTimeout);
+      this._completeLoading();
+    });
+  }
+
+  _completeLoading() {
+    LayoutAnimation.linear();
+    console.debug('GC: After Interactions on layout');
+    this.setState({
+      isInitialized: true,
+      text: '',
+      composerHeight: MIN_COMPOSER_HEIGHT,
+      messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight()),
     });
   }
 
@@ -418,6 +437,7 @@ class GiftedChat extends React.Component {
   }
 
   renderLoading() {
+    console.debug('GC: Render loading');
     if (this.props.renderLoading) {
       return this.props.renderLoading();
     }
@@ -426,6 +446,7 @@ class GiftedChat extends React.Component {
 
   render() {
     if (this.state.isInitialized === true) {
+      console.debug('GC: Render Chat View');
       return (
         <ActionSheet ref={component => this._actionSheetRef = component}>
           <View style={styles.container} onLayout={this.onMainViewLayout}>
@@ -435,6 +456,7 @@ class GiftedChat extends React.Component {
         </ActionSheet>
       );
     }
+
     return (
       <View style={styles.container} onLayout={this.onInitialLayoutViewLayout}>
         {this.renderLoading()}
