@@ -373,7 +373,6 @@ class GiftedChat extends React.Component {
   }
 
   _completeLoading() {
-    LayoutAnimation.linear();
     console.debug('GC: After Interactions on layout');
     this.setState({
       isInitialized: true,
