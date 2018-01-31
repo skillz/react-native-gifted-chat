@@ -238,7 +238,7 @@ class GiftedChat extends React.Component {
       ? this._minInputToolBarHeight * 2
       : this._minInputToolBarHeight;
   }
-  
+
   calculateInputToolbarHeight(composerHeight) {
     return composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT);
   }
@@ -428,15 +428,15 @@ class GiftedChat extends React.Component {
     this.setMaxHeight(layout.height);
     console.debug('GC: Trigger InteractionManager');
     this.failsafeTimeout = setTimeout(() => {
-      this._completeLoading();
+      this._completeLoading(layout);
     }, 1000);
     InteractionManager.runAfterInteractions(() => {
       clearTimeout(this.failsafeTimeout);
-      this._completeLoading();
+      this._completeLoading(layout);
     });
   }
 
-  _completeLoading() {
+  _completeLoading(layout: Object) {
     console.debug('GC: After Interactions on layout');
     this.notifyInputTextReset();
     this.setMaxHeight(layout.height);
