@@ -18,7 +18,7 @@ import {
   LayoutAnimation,
 } from 'react-native';
 
-import ActionSheet from '@exponent/react-native-action-sheet';
+import ActionSheet from '@expo/react-native-action-sheet';
 import moment from 'moment/min/moment-with-locales.min';
 import uuid from 'uuid';
 
