@@ -463,10 +463,9 @@ class GiftedChat extends React.Component {
         mainViewLayout: layout,
       });
     } else {
-      this.setState({
-        mainViewLayout: layout,
-      });
+      this.setState({ mainViewLayout: layout });
     }
+    
     if (this.getIsFirstLayout() === true) {
       this.setIsFirstLayout(false);
     }
