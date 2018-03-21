@@ -69,6 +69,7 @@ class GiftedChat extends React.Component {
       composerHeight: MIN_COMPOSER_HEIGHT,
       messagesContainerHeight: null,
       typingDisabled: false,
+      mainViewLayout: {},
     };
 
     this.onKeyboardWillShow = this.onKeyboardWillShow.bind(this);
@@ -459,8 +460,12 @@ class GiftedChat extends React.Component {
       this.setMaxHeight(layout.height);
       this.setState({
         messagesContainerHeight: this.prepareMessagesContainerHeight(this.getBasicMessagesContainerHeight()),
+        mainViewLayout: layout,
       });
+    } else {
+      this.setState({ mainViewLayout: layout });
     }
+    
     if (this.getIsFirstLayout() === true) {
       this.setIsFirstLayout(false);
     }
@@ -474,6 +479,7 @@ class GiftedChat extends React.Component {
       onSend: this.onSend,
       onInputSizeChanged: this.onInputSizeChanged,
       onTextChanged: this.onInputTextChanged,
+      layout: this.state.mainViewLayout,
       textInputProps: {
         ...this.props.textInputProps,
         ref: (textInput) => (this.textInput = textInput),
