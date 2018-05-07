@@ -2,10 +2,9 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyleSheet, Text, View, ViewPropTypes } from 'react-native';
-
 import moment from 'moment';
 
+import { StyleSheet, Text, View, ViewPropTypes } from 'react-native';
 import Color from './Color';
 import { TIME_FORMAT } from './Constant';
 
