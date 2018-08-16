@@ -105,8 +105,9 @@ export default class MessageContainer extends React.PureComponent {
           enableEmptySections
           automaticallyAdjustContentInsets={false}
           initialNumToRender={MAX_RENDER_ITEM}
-          maxToRenderPerBatch={MAX_RENDER_ITEM * 2}
-          windowSize={MAX_RENDER_ITEM * 2}
+          maxToRenderPerBatch={MAX_RENDER_ITEM}
+          windowSize={6}
+          updateCellsBatchingPeriod={500}
           removeClippedSubviews
           inverted={this.props.inverted}
           {...this.props.listViewProps}
