@@ -430,14 +430,7 @@ class GiftedChat extends React.Component {
     console.debug('GC: Set Max Height');
     this.setMaxHeight(layout.height);
     console.debug('GC: Trigger InteractionManager');
-    // TODO: investigate this timeout and see if reducing it has tangible perf improvements
-    this.failsafeTimeout = setTimeout(() => {
-      this._completeLoading(layout);
-    }, 1000);
-    InteractionManager.runAfterInteractions(() => {
-      clearTimeout(this.failsafeTimeout);
-      this._completeLoading(layout);
-    });
+    this._completeLoading(layout);
   }
 
   _completeLoading(layout: Object) {
