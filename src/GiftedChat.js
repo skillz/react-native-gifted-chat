@@ -266,7 +266,7 @@ class GiftedChat extends React.Component {
   }
 
   onKeyboardWillShow(e) {
-    if (!this.props.enableKeyboardEvents) {
+    if (!this.props.shouldManageKeyboard) {
       return;
     }
 
@@ -287,7 +287,7 @@ class GiftedChat extends React.Component {
   }
 
   onKeyboardWillHide() {
-    if (!this.props.enableKeyboardEvents) {
+    if (!this.props.shouldManageKeyboard) {
       return;
     }
 
@@ -308,7 +308,7 @@ class GiftedChat extends React.Component {
   }
 
   onKeyboardDidShow(e) {
-    if (!this.props.enableKeyboardEvents) {
+    if (!this.props.shouldManageKeyboard) {
       return;
     }
 
@@ -319,7 +319,7 @@ class GiftedChat extends React.Component {
   }
 
   onKeyboardDidHide(e) {
-    if (!this.props.enableKeyboardEvents) {
+    if (!this.props.shouldManageKeyboard) {
       return;
     }
 
@@ -611,7 +611,7 @@ GiftedChat.defaultProps = {
   maxInputLength: null,
   forceGetKeyboardHeight: false,
   inverted: true,
-  enableKeyboardEvents: true,
+  shouldManageKeyboard: true,
 };
 
 GiftedChat.propTypes = {
@@ -662,7 +662,7 @@ GiftedChat.propTypes = {
   forceGetKeyboardHeight: PropTypes.bool,
   inverted: PropTypes.bool,
   textInputProps: PropTypes.object,
-  enableKeyboardEvents: PropTypes.bool,
+  shouldManageKeyboard: PropTypes.bool,
 };
 
 export {
