@@ -50,6 +50,17 @@ class GiftedChat extends React.Component {
     this._locale = 'en';
     this._messages = [];
 
+    this.onKeyboardWillShow = this.onKeyboardWillShow.bind(this);
+    this.onKeyboardWillHide = this.onKeyboardWillHide.bind(this);
+    this.onKeyboardDidShow = this.onKeyboardDidShow.bind(this);
+    this.onKeyboardDidHide = this.onKeyboardDidHide.bind(this);
+    this.onSend = this.onSend.bind(this);
+    this.getLocale = this.getLocale.bind(this);
+    this.onInputSizeChanged = this.onInputSizeChanged.bind(this);
+    this.onInputTextChanged = this.onInputTextChanged.bind(this);
+    this.onMainViewLayout = this.onMainViewLayout.bind(this);
+    this.onInitialLayoutViewLayout = this.onInitialLayoutViewLayout.bind(this);
+
     this.state = {
       isInitialized: false, // initialization will calculate maxHeight before rendering the chat
       composerHeight: MIN_COMPOSER_HEIGHT,
@@ -64,19 +75,6 @@ class GiftedChat extends React.Component {
         onKeyboardDidHide: this.onKeyboardDidHide,
       }
     };
-
-    this.onKeyboardWillShow = this.onKeyboardWillShow.bind(this);
-    this.onKeyboardWillHide = this.onKeyboardWillHide.bind(this);
-    this.onKeyboardDidShow = this.onKeyboardDidShow.bind(this);
-    this.onKeyboardDidHide = this.onKeyboardDidHide.bind(this);
-    this.onSend = this.onSend.bind(this);
-    this.getLocale = this.getLocale.bind(this);
-    this.onInputSizeChanged = this.onInputSizeChanged.bind(this);
-    this.onInputTextChanged = this.onInputTextChanged.bind(this);
-    this.onMainViewLayout = this.onMainViewLayout.bind(this);
-    this.onInitialLayoutViewLayout = this.onInitialLayoutViewLayout.bind(this);
-
-
     // this.invertibleScrollViewProps = {
     //   inverted: true,
     //   keyboardShouldPersistTaps: this.props.keyboardShouldPersistTaps,
@@ -217,7 +215,9 @@ class GiftedChat extends React.Component {
   }
 
   onKeyboardWillShow(e) {
+    console.log('keyboard will show hit on gc');
     if (this.props.isPDMOpen) {
+      console.log('keyboard will show pdm open');
       return;
     }
 
