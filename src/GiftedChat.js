@@ -266,6 +266,10 @@ class GiftedChat extends React.Component {
   }
 
   onKeyboardWillShow(e) {
+    if (this.props.isPDMOpen) {
+      return;
+    }
+
     this.setIsTypingDisabled(true);
     this.setKeyboardHeight(e.endCoordinates ? e.endCoordinates.height : e.end.height);
     this.setBottomOffset(this.props.bottomOffset);
@@ -283,6 +287,11 @@ class GiftedChat extends React.Component {
   }
 
   onKeyboardWillHide() {
+    console.log('gifted chat keyboard will hide');
+    if (this.props.isPDMOpen) {
+      return;
+    }
+
     this.setIsTypingDisabled(true);
     this.setKeyboardHeight(0);
     this.setBottomOffset(0);
@@ -300,6 +309,10 @@ class GiftedChat extends React.Component {
   }
 
   onKeyboardDidShow(e) {
+    if (this.props.isPDMOpen) {
+      return;
+    }
+
     if (Platform.OS === 'android') {
       this.onKeyboardWillShow(e);
     }
@@ -307,6 +320,10 @@ class GiftedChat extends React.Component {
   }
 
   onKeyboardDidHide(e) {
+    if (this.props.isPDMOpen) {
+      return;
+    }
+
     if (Platform.OS === 'android') {
       this.onKeyboardWillHide(e);
     }
@@ -459,7 +476,7 @@ class GiftedChat extends React.Component {
     } else {
       this.setState({ mainViewLayout: layout });
     }
-    
+
     if (this.getIsFirstLayout() === true) {
       this.setIsFirstLayout(false);
     }
@@ -645,6 +662,7 @@ GiftedChat.propTypes = {
   forceGetKeyboardHeight: PropTypes.bool,
   inverted: PropTypes.bool,
   textInputProps: PropTypes.object,
+  isPDMOpen: PropTypes.bool,
 };
 
 export {
