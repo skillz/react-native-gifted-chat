@@ -287,7 +287,6 @@ class GiftedChat extends React.Component {
   }
 
   onKeyboardWillHide() {
-    console.log('gifted chat keyboard will hide');
     if (this.props.isPDMOpen) {
       return;
     }
