@@ -54,7 +54,15 @@ class GiftedChat extends React.Component {
       isInitialized: false, // initialization will calculate maxHeight before rendering the chat
       composerHeight: MIN_COMPOSER_HEIGHT,
       messagesContainerHeight: null,
-      typingDisabled: false
+      typingDisabled: false,
+      invertibleScrollViewProps: {
+        inverted: true,
+        keyboardShouldPersistTaps: props.keyboardShouldPersistTaps,
+        onKeyboardWillShow: this.onKeyboardWillShow,
+        onKeyboardWillHide: this.onKeyboardWillHide,
+        onKeyboardDidShow: this.onKeyboardDidShow,
+        onKeyboardDidHide: this.onKeyboardDidHide,
+      }
     };
 
     this.onKeyboardWillShow = this.onKeyboardWillShow.bind(this);
@@ -69,14 +77,14 @@ class GiftedChat extends React.Component {
     this.onInitialLayoutViewLayout = this.onInitialLayoutViewLayout.bind(this);
 
 
-    this.invertibleScrollViewProps = {
-      inverted: true,
-      keyboardShouldPersistTaps: this.props.keyboardShouldPersistTaps,
-      onKeyboardWillShow: this.onKeyboardWillShow,
-      onKeyboardWillHide: this.onKeyboardWillHide,
-      onKeyboardDidShow: this.onKeyboardDidShow,
-      onKeyboardDidHide: this.onKeyboardDidHide,
-    };
+    // this.invertibleScrollViewProps = {
+    //   inverted: true,
+    //   keyboardShouldPersistTaps: this.props.keyboardShouldPersistTaps,
+    //   onKeyboardWillShow: this.onKeyboardWillShow,
+    //   onKeyboardWillHide: this.onKeyboardWillHide,
+    //   onKeyboardDidShow: this.onKeyboardDidShow,
+    //   onKeyboardDidHide: this.onKeyboardDidHide,
+    // };
   }
 
   static append(currentMessages = [], messages) {
@@ -265,7 +273,7 @@ class GiftedChat extends React.Component {
     if (this.props.isPDMOpen) {
       return;
     }
-    
+
     if (Platform.OS === 'android') {
       this.onKeyboardWillHide(e);
     }
@@ -288,7 +296,7 @@ class GiftedChat extends React.Component {
         <MessageContainer
           {...this.props}
 
-          invertibleScrollViewProps={this.invertibleScrollViewProps}
+          invertibleScrollViewProps={this.state.invertibleScrollViewProps}
 
           messages={this.getMessages()}
 
