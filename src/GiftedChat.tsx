@@ -717,7 +717,7 @@ class GiftedChat extends React.Component<GiftedChatProps, GiftedChatState> {
       this.setMaxHeight(layout.height)
       this.setState({
         messagesContainerHeight: this.prepareMessagesContainerHeight(
-          this.getBasicMessagesContainerHeight(),
+          this.getMessagesContainerHeightWithKeyboard(),
         ),
       })
     }
