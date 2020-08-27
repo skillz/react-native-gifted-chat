@@ -41,6 +41,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
     showUserAvatar?: boolean;
     showAvatarForEveryMessage?: boolean;
     isKeyboardInternallyHandled?: boolean;
+    disableVirtualization?: boolean;
     renderAvatarOnTop?: boolean;
     inverted?: boolean;
     imageProps?: Message<TMessage>['props'];

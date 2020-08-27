@@ -18,6 +18,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
     extraData?: any;
     scrollToBottomOffset?: number;
     forwardRef?: RefObject<FlatList<IMessage>>;
+    disableVirtualization?: boolean;
     renderChatEmpty?(): React.ReactNode;
     renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode;
     renderMessage?(props: Message['props']): React.ReactNode;
